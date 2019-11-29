@@ -24,8 +24,11 @@ public class Board {
 	static final int GREEN_PLAYER_FINAL = 51;
 	
 	/**
-	* Can a player move with this score
-	*/
+	 * Evaluate if a player Can with this score.
+	 *
+	 * @deprecated use {@link #move(player, score, players)} instead.  
+	 */
+	@Deprecated
 	public Boolean canMove(Player player, int score) {
 		if (player.isAtHome() && score != 5)
 			return false;

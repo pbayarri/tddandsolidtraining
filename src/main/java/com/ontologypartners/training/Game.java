@@ -56,7 +56,7 @@ public class Game {
 					}
 					if (numberOfSix == 3) {
 						player.kill();
-					} else if (board.canMove(player, score)) {
+					} else {
 
    // TDD IMPLEMENT --> board.move(player, score, players);
 						
