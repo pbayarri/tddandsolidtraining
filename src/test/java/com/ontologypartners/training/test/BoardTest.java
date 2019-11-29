@@ -12,12 +12,12 @@ public class BoardTest {
 	static final Player playerAtHome = new Player("red");
 	
 	@Test
-	public void fiveScoreCanMovePlayerAtHome() {
+	public void fiveScoreCanMovePlayerAtHomeTest() {
 		Board board = new Board();
 		assertTrue(board.canMove(playerAtHome, 5));
 	}
 	@Test
-	public void NoFiveScoreCannotMovePlayerAtHome() {
+	public void NoFiveScoreCannotMovePlayerAtHomeTest() {
 		Board board = new Board();
 		assertFalse(board.canMove(playerAtHome, 3));
 	}
