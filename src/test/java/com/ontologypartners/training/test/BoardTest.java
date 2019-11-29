@@ -17,7 +17,7 @@ public class BoardTest {
 		assertTrue(board.canMove(playerAtHome, 5));
 	}
 	@Test
-	public void NoFiveScoreCannotMovePlayerAtHomeTest() {
+	public void noFiveScoreCannotMovePlayerAtHomeTest() {
 		Board board = new Board();
 		assertFalse(board.canMove(playerAtHome, 3));
 	}
