@@ -11,18 +11,6 @@ public class Board {
 	static final int FINAL_PATH_SQUARES = 8;
 	static final List<Integer> REST_SQUARES = Arrays.asList(5, 12, 17, 22, 29, 34, 39, 46, 51, 56, 63, 68);
 	
-	static final int YELLOW_PLAYER_START = 5;
-	static final int YELLOW_PLAYER_FINAL = 68;
-	
-	static final int BLUE_PLAYER_START = 22;
-	static final int BLUE_PLAYER_FINAL = 17;
-	
-	static final int RED_PLAYER_START = 39;
-	static final int RED_PLAYER_FINAL = 34;
-	
-	static final int GREEN_PLAYER_START = 56;
-	static final int GREEN_PLAYER_FINAL = 51;
-	
 	/**
 	 * Evaluate if a player Can with this score.
 	 *
@@ -47,5 +35,13 @@ public class Board {
 		}
 		
 		return player.getIsInFinalPath() && player.getPositionAtFinalPath() == FINAL_PATH_SQUARES;
+	}
+	
+	public void move(Player player, int score, List<Player> players) {
+		if (score == 5) {
+			player.setAtInitialPosition();
+		} else {
+			player.setPositionAtBoard(0);
+		}
 	}
 }

@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import com.ontologypartners.training.players.BluePlayer;
+import com.ontologypartners.training.players.GreenPlayer;
+import com.ontologypartners.training.players.RedPlayer;
+import com.ontologypartners.training.players.YellowPlayer;
+
 import lombok.Getter;
 
 /**
@@ -19,10 +24,10 @@ public class Game {
 	*/
 	public void prepareGame() {
 		players = Arrays.asList(
-            new Player("yellow"),
-            new Player("blue"),
-            new Player("red"),
-            new Player("green")
+            new YellowPlayer(),
+            new BluePlayer(),
+            new RedPlayer(),
+            new GreenPlayer()
          );
               
         board = new Board();
