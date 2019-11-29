@@ -46,13 +46,13 @@ public class BoardTest {
 		assertFalse(board.canMove(playerAtHome, 3));
 	}
 	@Test
-	public void playerAtHomeNoMovementIfNoFiveScore() {
+	public void playerAtHomeNoMovementIfNoFiveScoreTest() {
 		Board board = new Board();
 		board.move(playerAtHome, 2, players);
 		assertEquals(0, playerAtHome.getPositionAtBoard());
 	}
 	@Test
-	public void playerAtHomeStartsWithFiveScore() {
+	public void playerAtHomeStartsWithFiveScoreTest() {
 		Board board = new Board();
 		board.move(playerAtHome, 5, players);
 		assertTrue(playerAtHome.isAtInitialPosition());
