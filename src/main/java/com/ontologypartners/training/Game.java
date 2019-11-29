@@ -6,11 +6,17 @@ import java.util.Random;
 
 import lombok.Getter;
 
+/**
+* Game engine class
+*/
 public class Game {
 	private Board board;
 	private List<Player> players;
 	@Getter private Player winner;
 	
+	/**
+	* Initialize players and board
+	*/
 	public void prepareGame() {
 		players = Arrays.asList(
             new Player("yellow"),
@@ -19,13 +25,19 @@ public class Game {
             new Player("green")
          );
               
-        board = new Board(players);
+        board = new Board();
 	}
 	
+	/**
+	* Game ends when is a winner
+	*/
 	public Boolean isGameOver() {
 		return winner != null;
 	}
 	
+	/**
+	* Play method with game loop
+	*/
 	public void play() {
 		do
 		{
@@ -33,7 +45,7 @@ public class Game {
 				int score = new Random().nextInt((6 - 1) + 1) + 1;
 				if (board.canMove(player, score)) {
 					
-					//board.move(player, score);
+// TDD IMPLEMENT --> board.move(player, score, players);
 					
 					if (board.isWinner(player)) {
 						winner = player;
