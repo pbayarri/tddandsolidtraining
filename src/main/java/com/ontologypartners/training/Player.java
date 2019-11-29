@@ -27,4 +27,9 @@ public class Player {
 	public Boolean isAtHome() {
 		return positionAtBoard == AT_HOME_POSITION;
 	}
+	public void kill() {
+		if (!isInFinalPath) {
+			positionAtBoard = AT_HOME_POSITION;
+		}
+	}
 }

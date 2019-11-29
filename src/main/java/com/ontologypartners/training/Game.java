@@ -42,16 +42,30 @@ public class Game {
 		do
 		{
 			for (Player player : players) {
-				int score = new Random().nextInt((6 - 1) + 1) + 1;
-				if (board.canMove(player, score)) {
-					
-// TDD IMPLEMENT --> board.move(player, score, players);
-					
-					if (board.isWinner(player)) {
-						winner = player;
-						break;
+				if (isGameOver()) {
+					break;
+				}
+				
+				int numberOfSix = 0;
+				int score;
+				do
+				{
+					score = new Random().nextInt((6 - 1) + 1) + 1;
+					if (score == 6) {
+						++numberOfSix;
+					}
+					if (numberOfSix == 3) {
+						player.kill();
+					} else if (board.canMove(player, score)) {
+
+   // TDD IMPLEMENT --> board.move(player, score, players);
+						
+						if (board.isWinner(player)) {
+							winner = player;
+						}
 					}
 				}
+				while(score == 6 && numberOfSix != 3 && !isGameOver());
 			}
 		} 
 		while (isGameOver());
