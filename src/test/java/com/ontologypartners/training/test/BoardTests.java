@@ -22,11 +22,7 @@ public class BoardTests {
 	Player playerCloseFinalPath;
 	Player playerInRest;
 	
-	final List<Player> players = Arrays.asList(playerAtHome,
-			playerCloseEndOfBoard,
-			playerCloseFinalPath,
-			playerInRest
-			);
+	List<Player> players;
 	
 	private Board board;
 	
@@ -41,6 +37,12 @@ public class BoardTests {
 		playerCloseFinalPath.setPositionAtBoard(65);
 		playerInRest = new BluePlayer();
 		playerInRest.setPositionAtBoard(68);
+		
+		players = Arrays.asList(playerAtHome,
+				playerCloseEndOfBoard,
+				playerCloseFinalPath,
+				playerInRest
+				);
 	}
 	
 	@Test
@@ -104,6 +106,35 @@ public class BoardTests {
 		board.move(playerCloseFinalPath, 5, players);
 		assertFalse(board.isWinner(playerCloseFinalPath));
 		assertEquals(positionAtEnd, playerCloseFinalPath.getPositionAtFinalPath());
-		
+	}
+	@Test
+	public void testMove_WhenPlayerKillAnotherPlayerAndNoCount20() {
+		board.move(playerCloseFinalPath, 1, players);
+		assertEquals(66, playerCloseFinalPath.getPositionAtBoard());
+		assertTrue(playerCloseEndOfBoard.isAtHome());
+	}
+	@Test
+	public void testMove_WhenPlayerKillAnotherPlayerAndCount20() {
+		playerCloseFinalPath.setPositionAtBoard(10);
+		playerCloseEndOfBoard.setPositionAtBoard(11);
+		board.move(playerCloseFinalPath, 1, players);
+		assertEquals(31, playerCloseFinalPath.getPositionAtBoard());
+		assertTrue(playerCloseEndOfBoard.isAtHome());
+	}
+	@Test
+	public void testMove_WhenPlayerNoKillAnotherPlayerInARest() {
+		board.move(playerCloseFinalPath, 3, players);
+		assertEquals(68, playerCloseFinalPath.getPositionAtBoard());
+		assertEquals(68, playerInRest.getPositionAtBoard());
+	}
+	@Test
+	public void testMove_WhenPlayerKillTwoPlayersWithOneMovement() {
+		playerCloseFinalPath.setPositionAtBoard(10);
+		playerInRest.setPositionAtBoard(11);
+		playerCloseEndOfBoard.setPositionAtBoard(31);
+		board.move(playerCloseFinalPath, 1, players);
+		assertEquals(51, playerCloseFinalPath.getPositionAtBoard());
+		assertTrue(playerCloseEndOfBoard.isAtHome());
+		assertTrue(playerInRest.isAtHome());
 	}
 }

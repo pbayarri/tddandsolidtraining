@@ -13,7 +13,7 @@ public abstract class Player {
 	@Getter @Setter(AccessLevel.PROTECTED) private String color;
 	@Getter @Setter private int positionAtBoard;
 	@Getter private int positionAtFinalPath;
-	@Getter @Setter private Boolean isInFinalPath;
+	@Getter @Setter(AccessLevel.PROTECTED) private Boolean isInFinalPath;
 	
 	public Player() {
 		positionAtBoard = AT_HOME_POSITION;
@@ -24,15 +24,13 @@ public abstract class Player {
 	/**
 	* Is player at home
 	*/
-	protected Boolean isAtHome() {
+	public Boolean isAtHome() {
 		return positionAtBoard == AT_HOME_POSITION;
 	}
 	public void kill() {
-		if (!isInFinalPath) {
-			positionAtBoard = AT_HOME_POSITION;
-			positionAtFinalPath = AT_HOME_POSITION;
-			isInFinalPath = false;
-		}
+		positionAtBoard = AT_HOME_POSITION;
+		positionAtFinalPath = AT_HOME_POSITION;
+		isInFinalPath = false;
 	}
 	public abstract void setAtInitialPosition();
 	public abstract Boolean isAtInitialPosition();
@@ -66,7 +64,9 @@ public abstract class Player {
 		
 		if (arrivesToFinalPath(score)) {
 			int scoreInTheFinalPath = calculateHowManySquaresGetInsideTheFinalPath(score);
-			setPositionAtFinalPath(scoreInTheFinalPath);
+			if (scoreInTheFinalPath <= maxFinalPathSquares) {
+				setPositionAtFinalPath(scoreInTheFinalPath);
+			}
 			return;
 		}
 			
@@ -96,5 +96,12 @@ public abstract class Player {
 	}
 	private Boolean scoreIsValidForFinalPath(int score, int maxFinalPathSquares) {
 		return getPositionAtFinalPath() + score <= maxFinalPathSquares;
+	}
+	public Boolean collides(Player player) {
+		if (player == this) {
+			return false;
+		}
+		
+		return getPositionAtBoard() == player.positionAtBoard;
 	}
 }

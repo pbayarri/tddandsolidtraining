@@ -39,6 +39,27 @@ public class Board {
 	}
 	
 	public void move(Player player, int score, List<Player> players) {
-		player.move(score, EXIT_HOME_SCORE, FINAL_PATH_SQUARES, BOARD_SQUARES);		
+		player.move(score, EXIT_HOME_SCORE, FINAL_PATH_SQUARES, BOARD_SQUARES);
+		
+		int playerCount = 0;
+		do
+		{
+			Player p = players.get(playerCount);
+			if (canPlayerKillAnotherPlayer(player, p)) {
+				p.kill();
+				player.move(20, EXIT_HOME_SCORE, FINAL_PATH_SQUARES, BOARD_SQUARES);
+				playerCount = 0;
+			}
+			else
+			{
+				++playerCount;
+			}
+		}
+		while (playerCount < players.size());
+	}
+	
+	private Boolean canPlayerKillAnotherPlayer(Player player, Player anotherPlayer) {
+		return !player.getIsInFinalPath() && !REST_SQUARES.contains(player.getPositionAtBoard()) 
+				&& player.collides(anotherPlayer);
 	}
 }
