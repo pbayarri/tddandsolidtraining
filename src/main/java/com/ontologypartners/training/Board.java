@@ -39,29 +39,6 @@ public class Board {
 	}
 	
 	public void move(Player player, int score, List<Player> players) {
-		
-		if (player.isAtHome()) {
-			if (score == EXIT_HOME_SCORE) {
-				player.setAtInitialPosition();
-			} else {
-				player.setPositionAtBoard(0);
-			}
-		} else {
-			if (player.getIsInFinalPath()) {
-				if (player.getPositionAtFinalPath() + score <= FINAL_PATH_SQUARES) {
-					player.setPositionAtFinalPath(player.getPositionAtFinalPath() + score);
-				}
-			} else if (player.arrivesToFinalPath(score)) {
-				int scoreInTheFinalPath = player.getPositionAtBoard() + score - player.getLastSquareInBoard();
-				
-				player.setPositionAtBoard(player.getLastSquareInBoard());
-				player.setIsInFinalPath(true);
-				player.setPositionAtFinalPath(scoreInTheFinalPath);
-			} else {
-				int newPosition = player.getPositionAtBoard() + score;
-				newPosition = newPosition > BOARD_SQUARES ? newPosition % BOARD_SQUARES : newPosition;
-				player.setPositionAtBoard(newPosition);
-			}
-		}		
+		player.move(score, EXIT_HOME_SCORE, FINAL_PATH_SQUARES, BOARD_SQUARES);		
 	}
 }

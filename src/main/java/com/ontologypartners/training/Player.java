@@ -12,7 +12,7 @@ public abstract class Player {
 	
 	@Getter @Setter(AccessLevel.PROTECTED) private String color;
 	@Getter @Setter private int positionAtBoard;
-	@Getter @Setter private int positionAtFinalPath;
+	@Getter private int positionAtFinalPath;
 	@Getter @Setter private Boolean isInFinalPath;
 	
 	public Player() {
@@ -24,7 +24,7 @@ public abstract class Player {
 	/**
 	* Is player at home
 	*/
-	public Boolean isAtHome() {
+	protected Boolean isAtHome() {
 		return positionAtBoard == AT_HOME_POSITION;
 	}
 	public void kill() {
@@ -38,7 +38,8 @@ public abstract class Player {
 	public abstract Boolean isAtInitialPosition();
 	public abstract int getLastSquareInBoard();
 	public abstract int getFirstSquareInBoard();
-	public Boolean arrivesToFinalPath(int score) {
+	
+	protected Boolean arrivesToFinalPath(int score) {
 		if (getIsInFinalPath()) {
 			return true;
 		}
@@ -50,5 +51,50 @@ public abstract class Player {
 		}
 		
 		return false;
+	}
+	
+	public void move(int score, int scoreForExitFromHome, int maxFinalPathSquares, int maxBoardSquares) {
+		if (isAtHome()) {
+			moveAtHome(score, scoreForExitFromHome);
+			return;
+		}
+		
+		if (getIsInFinalPath() && scoreIsValidForFinalPath(score, maxFinalPathSquares)) {
+			setPositionAtFinalPath(getPositionAtFinalPath() + score);
+			return;
+		}
+		
+		if (arrivesToFinalPath(score)) {
+			int scoreInTheFinalPath = calculateHowManySquaresGetInsideTheFinalPath(score);
+			setPositionAtFinalPath(scoreInTheFinalPath);
+			return;
+		}
+			
+		simpleMove(score, maxBoardSquares);
+	}
+	private void simpleMove(int score, int maxBoardSquares) {
+		int newPosition = calculateNewPosition(getPositionAtBoard(), score, maxBoardSquares);;
+		setPositionAtBoard(newPosition);
+	}
+	private int calculateNewPosition(int currentPosition, int score, int maxBoardSquares) {
+		int newPosition = currentPosition + score;
+		newPosition = newPosition > maxBoardSquares ? newPosition % maxBoardSquares : newPosition;
+		return newPosition;
+	}
+	public void setPositionAtFinalPath(int scoreInTheFinalPath) {
+		setPositionAtBoard(getLastSquareInBoard());
+		setIsInFinalPath(true);
+		positionAtFinalPath = scoreInTheFinalPath;
+	}
+	private int calculateHowManySquaresGetInsideTheFinalPath(int score) {
+		return getPositionAtBoard() + score - getLastSquareInBoard();
+	}
+	private void moveAtHome(int score, int scoreForExitFromHome) {
+		if (score == scoreForExitFromHome) {
+			setAtInitialPosition();
+		}
+	}
+	private Boolean scoreIsValidForFinalPath(int score, int maxFinalPathSquares) {
+		return getPositionAtFinalPath() + score <= maxFinalPathSquares;
 	}
 }
