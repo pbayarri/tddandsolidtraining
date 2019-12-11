@@ -73,6 +73,6 @@ public class Game {
 				while(score == 6 && numberOfSix != 3 && !isGameOver());
 			}
 		} 
-		while (isGameOver());
+		while (!isGameOver());
 	}
 }
