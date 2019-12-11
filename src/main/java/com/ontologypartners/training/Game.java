@@ -59,11 +59,11 @@ public class Game {
 					if (score == 6) {
 						++numberOfSix;
 					}
-					if (numberOfSix == 3) {
+					if (numberOfSix == 3 && !player.getIsInFinalPath()) {
 						player.kill();
 					} else {
 
-   // TDD IMPLEMENT --> board.move(player, score, players);
+						board.move(player, score, players);
 						
 						if (board.isWinner(player)) {
 							winner = player;
@@ -73,6 +73,6 @@ public class Game {
 				while(score == 6 && numberOfSix != 3 && !isGameOver());
 			}
 		} 
-		while (isGameOver());
+		while (!isGameOver());
 	}
 }

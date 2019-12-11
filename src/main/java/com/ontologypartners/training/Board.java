@@ -59,7 +59,7 @@ public class Board {
 	}
 	
 	private Boolean canPlayerKillAnotherPlayer(Player player, Player anotherPlayer) {
-		return !player.getIsInFinalPath() && !REST_SQUARES.contains(player.getPositionAtBoard()) 
+		return !player.isAtHome() && !player.getIsInFinalPath() && !REST_SQUARES.contains(player.getPositionAtBoard()) 
 				&& player.collides(anotherPlayer);
 	}
 }
