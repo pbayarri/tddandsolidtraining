@@ -22,4 +22,13 @@ public class BluePlayer extends Player {
 		return getPositionAtBoard() == BLUE_PLAYER_START;
 	}
 	
+	@Override
+	public int getLastSquareInBoard() {
+		return BLUE_PLAYER_FINAL;
+	}
+	
+	@Override
+	public int getFirstSquareInBoard() {
+		return BLUE_PLAYER_START;
+	}
 }

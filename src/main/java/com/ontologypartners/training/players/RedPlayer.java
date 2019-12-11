@@ -22,4 +22,13 @@ public class RedPlayer extends Player {
 		return getPositionAtBoard() == RED_PLAYER_START;
 	}
 	
+	@Override
+	public int getLastSquareInBoard() {
+		return RED_PLAYER_FINAL;
+	}
+	
+	@Override
+	public int getFirstSquareInBoard() {
+		return RED_PLAYER_START;
+	}
 }

@@ -21,5 +21,27 @@ public class YellowPlayer extends Player {
 	public Boolean isAtInitialPosition() {
 		return getPositionAtBoard() == YELLOW_PLAYER_START;
 	}
+
+	@Override
+	public int getLastSquareInBoard() {
+		return YELLOW_PLAYER_FINAL;
+	}
 	
+	@Override
+	public int getFirstSquareInBoard() {
+		return YELLOW_PLAYER_START;
+	}
+	
+	@Override
+	public Boolean arrivesToFinalPath(int score) {
+		if (getIsInFinalPath()) {
+			return true;
+		}
+		
+		if (getPositionAtBoard() + score > getLastSquareInBoard()) {
+			return true;
+		}
+		
+		return false;
+	}
 }

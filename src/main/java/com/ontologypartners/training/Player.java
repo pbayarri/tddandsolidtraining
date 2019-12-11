@@ -30,8 +30,25 @@ public abstract class Player {
 	public void kill() {
 		if (!isInFinalPath) {
 			positionAtBoard = AT_HOME_POSITION;
+			positionAtFinalPath = AT_HOME_POSITION;
+			isInFinalPath = false;
 		}
 	}
 	public abstract void setAtInitialPosition();
 	public abstract Boolean isAtInitialPosition();
+	public abstract int getLastSquareInBoard();
+	public abstract int getFirstSquareInBoard();
+	public Boolean arrivesToFinalPath(int score) {
+		if (getIsInFinalPath()) {
+			return true;
+		}
+		if (getPositionAtBoard() > getFirstSquareInBoard())
+			return false;
+		
+		if (getPositionAtBoard() + score > getLastSquareInBoard()) {
+			return true;
+		}
+		
+		return false;
+	}
 }

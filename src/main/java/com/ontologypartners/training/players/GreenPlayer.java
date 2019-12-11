@@ -22,4 +22,13 @@ public class GreenPlayer extends Player {
 		return getPositionAtBoard() == GREEN_PLAYER_START;
 	}
 	
+	@Override
+	public int getLastSquareInBoard() {
+		return GREEN_PLAYER_FINAL;
+	}
+	
+	@Override
+	public int getFirstSquareInBoard() {
+		return GREEN_PLAYER_START;
+	}
 }
