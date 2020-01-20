@@ -1,0 +1,22 @@
+TDD Training
+-------------------------------------
+
+# estar en casa
+## y sacar 1-4 o 6
+## y sacar un 5
+
+# avanzar por el tablero
+	## sumar tirada a la posición actual
+		### pasar de la casilla 68 a la casilla 1
+	## llegar a las casillas de meta
+		### moverse en las casillas de la meta
+		#### llegar a la meta sin pasarse
+
+	## caer en una casilla ocupada
+		### matar y sumar 20 (si puede)
+		#### reevaluar tras contar 20
+		### es un descanso/seguro, no pasa nada
+
+# volver a tirar al sacar un 6
+## irse a casa al sacar 3 veces seguidas un 6
+### si estás en la meta no te vas a la calle

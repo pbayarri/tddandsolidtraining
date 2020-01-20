@@ -1,0 +1,58 @@
+TDD Training
+-------------------------------------
+[master]
+# estar en casa
+## y sacar 1-4 o 6
+## y sacar un 5 (1)
+[moveAtHome]
+
+# avanzar por el tablero
+	## sumar tirada a la posición actual
+		### pasar de la casilla 68 a la casilla 1
+	## llegar a las casillas de meta
+		### moverse en las casillas de la meta
+		#### llegar a la meta sin pasarse (2)
+[allPlayerMove]
+		(3)
+[playerMoveRefactor]
+	## caer en una casilla ocupada
+		(4)
+		### matar y sumar 20 (si puede)
+		#### reevaluar tras contar 20
+		### es un descanso/seguro, no pasa nada
+[deathBusiness]
+# volver a tirar al sacar un 6
+## irse a casa al sacar 3 veces seguidas un 6
+### si estás en la meta no te vas a la calle
+[readyForPlay]
+(5)
+
+###############################
+(1) # refactor de clases Player con herecia
+# traslado de propiedades de Board a sus correspondientes clases Player
+
+(2) # los tests son código también, por tanto deben estar bien programados y sin código duplicado 
+
+(3) algo huele mal en el método move del board
+- se está haciendo muy grande
+- demasiados if (complejidad ciclomática)
+- toda la lógica actual mueve un jugador SIN IMPORTAR EL TABLERO
+-- refactorizar la lógica y meterla en la clase player
+--- TDD permite grandes refactors de código sin terminar con el soporte de los tests
+---- abstraer el jugador del tablero (para tableros de más jugadores)
+---- proteger métodos anteriormente públicos (arrivesToFinalPath, kill...)
+---- encapsular lógica como la de setPositionAtFinalPath
+
+# crecimiento del método move
+## refactor en métodos más pequeños, más entendibles, más mantenibles, concepto de complejidad ciclomática
+## independencia del método calcular nueva posición
+### énfasis en métodos con un único propósito
+
+# por qué el método move requiere tests y los métodos de las clases Player no
+
+(4) el método collides de Player requeriría hacer TDD para todas sus casuísticas
+
+(5) a partir de aquí sería revisar el código original y ajustar con lo aprendido
+# hacer hincapié en la problemática de tener news a la hora de hacer testing
+## por ejemplo, el score en la clase Game es un new de random
+### hablar de inyección de dependencias e inversión de control para sacar el origen del score a otra clase 
